@@ -1,0 +1,15 @@
+name: tuda
+description: A simple URL-shorter app
+version: 1.0.0
+homepage: https://to.prbla.ru
+
+environment:
+  sdk: '>=2.14.3 <3.0.0'
+
+dependencies:
+  http: ^0.13.4
+  neat_periodic_task: ^2.0.0
+  sentry: ^6.0.1
+
+dev_dependencies:
+  lints: ^1.0.0
