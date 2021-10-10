@@ -11,7 +11,7 @@ class Shorter {
   void serve([dynamic address, int? port]) async {
     database.scheduler.start();
     var server = await HttpServer.bind(address ?? InternetAddress.anyIPv6,
-        port ?? Platform.environment['TUDA_PORT'] as int)
+        port ?? int.parse(Platform.environment['TUDA_PORT']!))
       ..listen(process);
     print('Listening ${server.address.host} on ${server.port}...');
   }
@@ -21,7 +21,7 @@ class Shorter {
       var redirectableUrl = value ?? '/';
 
       print('Redirecting ${request.uri.path} to $redirectableUrl '
-           'from ${request.connectionInfo?.remoteAddress.address}');
+          'from ${request.connectionInfo?.remoteAddress.address}');
 
       request.response
         ..redirect(Uri.parse(redirectableUrl),
