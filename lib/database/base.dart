@@ -1,4 +1,5 @@
 import 'package:neat_periodic_task/neat_periodic_task.dart';
+import 'package:sentry/sentry.dart';
 
 class Database {
   late NeatPeriodicTaskScheduler scheduler;
@@ -12,7 +13,15 @@ class Database {
       interval: interval,
       timeout: const Duration(seconds: 5),
       minCycle: const Duration(seconds: 5),
-      task: () async => links = await sync(),
+      task: () => sync().then(
+        (value) => links = value,
+        onError: (error, stackTrace) async {
+          await Sentry.captureException(
+            error,
+            stackTrace: stackTrace,
+          );
+        },
+      ),
     );
   }
 
