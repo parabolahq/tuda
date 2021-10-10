@@ -16,7 +16,7 @@ jobs:
           host: ${{ secrets.REMOTE_HOST_ADDRESS }}
           username: root
           password: ${{ secrets.REMOTE_HOST_PASSWORD }}
-          script: sh redeploy_tuda.sh
+          script: sh redeploy_tuda.sh ${{ secrets.GITHUB_TOKEN }} ${{ github.actor }} ${{ github.repository }}
 
   build:
     runs-on: ubuntu-latest
