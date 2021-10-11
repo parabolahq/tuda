@@ -1,4 +1,4 @@
-# Tuda
+# Tuda ![Deploy Status](https://img.shields.io/github/workflow/status/parabolahq/tuda/CI%20to%20GHCR%20and%20CD%20to%20Server?label=deploy)
 
 A simple URL-shorter service written in pure [Dart](https://dart.dev). With [Notion](https://notion.so) as a database, it provides the simplest interface for setting your links.
 
