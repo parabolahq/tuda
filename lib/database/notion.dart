@@ -29,10 +29,12 @@ class NotionDatabase extends Database {
       ),
     );
 
-    var results = jsonDecode(response.body)['results'];
+    var parsed = jsonDecode(response.body);
+    if (!parsed.containsKey('results')) continue;
+
     var newLinks = <String, String>{};
 
-    for (var page in results) {
+    for (var page in parsed['results']) {
       if (page['object'] != 'page') continue;
       var properties = page['properties'].values.toList() as List<dynamic>;
 
