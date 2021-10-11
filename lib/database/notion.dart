@@ -30,7 +30,7 @@ class NotionDatabase extends Database {
     );
 
     var parsed = jsonDecode(response.body);
-    if (!parsed.containsKey('results')) continue;
+    if (!parsed.containsKey('results')) return links;
 
     var newLinks = <String, String>{};
 
