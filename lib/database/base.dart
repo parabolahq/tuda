@@ -3,7 +3,7 @@ import 'package:sentry/sentry.dart';
 
 class Database {
   late NeatPeriodicTaskScheduler scheduler;
-  Map<String, String> links = {'/': 'https://парабола.рус/'};
+  Map<String, String> links = {};
 
   Database({Duration interval = const Duration(seconds: 20)}) {
     assert(interval.inSeconds >= 10);
