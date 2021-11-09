@@ -1,7 +1,7 @@
 name: tuda
 description: A simple URL-shorter app
-version: 1.0.0
-homepage: https://to.prbla.ru
+version: 1.0.4
+homepage: https://at.prbla.ru
 
 environment:
   sdk: '>=2.14.3 <3.0.0'
