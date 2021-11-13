@@ -17,16 +17,19 @@ class Shorter {
   }
 
   void process(HttpRequest request) {
-    database.search(request.uri.path).then((String? value) {
-      var redirectableUrl = value ?? '/';
+    database.search(request.uri.path).then(
+      (String? value) {
+        var redirectableUrl = value ?? '/';
 
-      print('Redirecting ${request.uri.path} to $redirectableUrl '
-          'from ${request.connectionInfo?.remoteAddress.address}');
+        print('Redirecting ${request.uri.path} to $redirectableUrl '
+            'from ${request.connectionInfo?.remoteAddress.address}');
 
-      request.response
-        ..redirect(Uri.parse(redirectableUrl),
-            status: HttpStatus.permanentRedirect)
-        ..close();
-    });
+        request.response
+          ..headers.add('X-Robots-Tag', 'noindex')
+          ..redirect(Uri.parse(redirectableUrl),
+              status: HttpStatus.permanentRedirect)
+          ..close();
+      },
+    );
   }
 }
