@@ -21,4 +21,3 @@ ENV TUDA_PORT=5001
 
 # Start server.
 EXPOSE 5001
-CMD ["/app/bin/tuda"]
