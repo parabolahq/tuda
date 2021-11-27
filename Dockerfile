@@ -15,9 +15,3 @@ RUN dart compile exe bin/entry.dart -o bin/tuda
 FROM scratch
 COPY --from=build /runtime/ /
 COPY --from=build /app/bin/tuda /app/bin/
-
-# Setting port
-ENV TUDA_PORT=5001
-
-# Start server.
-EXPOSE 5001
