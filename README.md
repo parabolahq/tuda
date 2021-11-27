@@ -12,5 +12,4 @@ Those environment variables are required:
 | ----------------- | -------------------------------------------------------------------------------------------------- |
 | `NOTION_TOKEN`    | Internal integration token that you can get [from Notion](https://www.notion.so/my-integrations).  |
 | `NOTION_DATABASE` | Notion's database unique identifier                                                                |
-| `TUDA_PORT`       | Port for the web-server                                                                            |
 | `SENTRY_DNS`      | DNS for Sentry error handling                                                                      |
