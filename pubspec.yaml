@@ -1,6 +1,6 @@
 name: tuda
 description: A simple URL-shorter app
-version: 1.0.4
+version: 1.0.5
 homepage: https://at.prbla.ru
 
 environment:
