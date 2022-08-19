@@ -1,5 +1,4 @@
-import 'dart:io'
-    show HttpRequest, HttpServer, HttpStatus, InternetAddress, Platform;
+import 'dart:io';
 
 import 'package:tuda/database/base.dart';
 
@@ -21,13 +20,13 @@ class Shorter {
       (String? value) {
         var redirectableUrl = value ?? '/';
 
-        print('Redirecting ${request.uri.path} to $redirectableUrl '
+        stdout.writeln('Redirecting ${request.uri.path} to $redirectableUrl '
             'from ${request.connectionInfo?.remoteAddress.address}');
 
         request.response
           ..headers.add('X-Robots-Tag', 'noindex')
           ..redirect(Uri.parse(redirectableUrl),
-              status: HttpStatus.permanentRedirect)
+              status: HttpStatus.movedTemporarily)
           ..close();
       },
     );

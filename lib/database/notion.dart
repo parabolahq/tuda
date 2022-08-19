@@ -1,38 +1,34 @@
-import 'dart:convert' show jsonDecode, jsonEncode;
-import 'dart:io' show Platform;
+import 'dart:convert';
+import 'dart:io';
 
-import 'package:tuda/database/base.dart' show Database;
-import 'package:http/http.dart' show post;
+import 'package:tuda/database/base.dart';
+import 'package:http/http.dart';
 
 class NotionDatabase extends Database {
   NotionDatabase({
     String? token,
     String? database,
-    Duration interval = const Duration(minutes: 10),
-  }) : super(interval: interval) {
-    _token = token ?? Platform.environment['NOTION_TOKEN']!;
-    _database = database ?? Platform.environment['NOTION_DATABASE']!;
-  }
+    super.interval = const Duration(minutes: 10),
+  })  : token = token ?? Platform.environment['NOTION_TOKEN']!,
+        database = database ?? Platform.environment['NOTION_DATABASE']!;
 
-  late String _token, _database;
+  final String token, database;
 
   @override
   Future<Map<String, String>> sync() async {
     var response = await post(
-      Uri.https('api.notion.com', 'v1/databases/$_database/query'),
+      Uri.https('api.notion.com', 'v1/databases/$database/query'),
       headers: {
-        'Authorization': 'Bearer $_token',
+        'Authorization': 'Bearer $token',
         'Notion-Version': '2021-08-16',
       },
-      body: jsonEncode(
-        {'filter': {}},
-      ),
+      body: jsonEncode({'filter': {}}),
     );
 
     var parsed = jsonDecode(response.body);
     if (!parsed.containsKey('results')) return links;
 
-    var newLinks = <String, String>{};
+    var updated = <String, String>{};
 
     for (var page in parsed['results']) {
       if (page['object'] != 'page') continue;
@@ -51,9 +47,9 @@ class NotionDatabase extends Database {
       if (name.replaceAll(' ', '').isEmpty ||
           target.replaceAll(' ', '').isEmpty) continue;
 
-      newLinks[name.startsWith('/') ? name : '/$name'] = target;
+      updated[name.startsWith('/') ? name : '/$name'] = target;
     }
 
-    return newLinks;
+    return updated;
   }
 }
