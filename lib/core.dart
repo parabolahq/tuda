@@ -9,8 +9,8 @@ class Shorter {
 
   void serve([dynamic address, int? port]) async {
     database.scheduler.start();
-    var server = await HttpServer.bind(address ?? InternetAddress.anyIPv6,
-        port ?? int.parse(Platform.environment['PORT']!))
+    var server = await HttpServer.bind(
+        address ?? InternetAddress.anyIPv6, port ?? int.fromEnvironment('PORT'))
       ..listen(process);
     print('Listening ${server.address.host} on ${server.port}...');
   }

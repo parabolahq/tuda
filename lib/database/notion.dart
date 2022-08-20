@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:tuda/database/base.dart';
 import 'package:http/http.dart';
 
@@ -9,8 +7,8 @@ class NotionDatabase extends Database {
     String? token,
     String? database,
     super.interval = const Duration(minutes: 10),
-  })  : token = token ?? Platform.environment['NOTION_TOKEN']!,
-        database = database ?? Platform.environment['NOTION_DATABASE']!;
+  })  : token = token ?? String.fromEnvironment('NOTION_TOKEN'),
+        database = database ?? String.fromEnvironment('NOTION_DATABASE');
 
   final String token, database;
 

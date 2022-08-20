@@ -14,12 +14,10 @@ class Database {
       minCycle: const Duration(seconds: 5),
       task: () => sync().then(
         (Map<String, String> value) => links = value,
-        onError: (error, stackTrace) async {
-          await Sentry.captureException(
-            error,
-            stackTrace: stackTrace,
-          );
-        },
+        onError: (error, stackTrace) => Sentry.captureException(
+          error,
+          stackTrace: stackTrace,
+        ),
       ),
     );
   }
